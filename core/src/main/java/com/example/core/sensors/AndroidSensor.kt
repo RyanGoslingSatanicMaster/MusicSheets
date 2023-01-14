@@ -1,4 +1,4 @@
-package com.example.core.`motion-sensor`
+package com.example.core.sensors
 
 import android.content.Context
 import android.hardware.Sensor
@@ -41,4 +41,6 @@ abstract class AndroidSensor(
         if (event?.sensor?.type == sensorType)
             onSensorValuesChanged?.invoke(event.values.toList())
     }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) = Unit
 }

@@ -1,4 +1,4 @@
-package com.example.core.`motion-sensor`
+package com.example.core.sensors
 
 abstract class MeasurableSensor(protected val sensorType: Int) {
 
