@@ -1,4 +1,4 @@
-package com.example.motion_music
+package com.example.feature_motion_music
 
 import org.junit.Test
 

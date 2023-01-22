@@ -1,21 +1,16 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("kapt")
     kotlin("android")
 }
 
 android {
-    namespace = "com.example.feature-motion-music"
+    namespace = "com.example.feature_motion_music"
     compileSdk = AppConfig.compileSdk
-    buildToolsVersion = AppConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId = "com.example.musicsheets"
         minSdk = AppConfig.minSdk
         targetSdk = AppConfig.targetSdk
-        versionCode = AppConfig.versionCode
-        versionName = AppConfig.versionName
-
 
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
         vectorDrawables {
@@ -32,6 +27,9 @@ android {
             )
         }
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.extComposeKotlinVersion
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -44,19 +42,21 @@ android {
             jvmTarget = "1.8"
         }
     }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation(project(":common"))
+    implementation(AppDependencies.androidDep)
+    implementation(AppDependencies.composeActivityDep)
     implementation(AppDependencies.composeDep)
+    implementation(AppDependencies.composeMaterialDep)
     implementation(AppDependencies.composePreviewDep)
     implementation(AppDependencies.kotlinDep)
     implementation(AppDependencies.dagger2Dep)
     implementation(AppDependencies.lifecycleDep)
+    implementation(AppDependencies.lifecycleViewModelDep)
+    implementation(AppDependencies.lifecycleLiveDataDep)
     testImplementation(AppDependencies.jUnitDep)
     kapt(AppDependencies.dagger2CompilerDep)
 }

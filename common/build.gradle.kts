@@ -1,27 +1,25 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("kapt")
-    kotlin("android")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace = "com.example.musicsheets"
+    namespace = "com.example.common"
     compileSdk = AppConfig.compileSdk
 
     defaultConfig {
-        applicationId = "com.example.musicsheets"
         minSdk = AppConfig.minSdk
         targetSdk = AppConfig.targetSdk
-        versionCode = AppConfig.versionCode
-        versionName = AppConfig.versionName
 
+        testInstrumentationRunner = AppConfig.androidTestInstrumentation
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -29,20 +27,15 @@ android {
             )
         }
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.extComposeKotlinVersion
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.extComposeKotlinVersion
-    }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
@@ -52,21 +45,17 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature-motion-music"))
-    implementation(project(":core"))
-    implementation(project(":common"))
+
     implementation(AppDependencies.androidDep)
+    implementation(AppDependencies.composeActivityDep)
     implementation(AppDependencies.composeDep)
+    implementation(AppDependencies.composeMaterialDep)
     implementation(AppDependencies.composePreviewDep)
     implementation(AppDependencies.kotlinDep)
     implementation(AppDependencies.dagger2Dep)
     implementation(AppDependencies.lifecycleDep)
     implementation(AppDependencies.lifecycleViewModelDep)
     implementation(AppDependencies.lifecycleLiveDataDep)
-    implementation(AppDependencies.composeActivityDep)
-    implementation(AppDependencies.composeMaterialDep)
     testImplementation(AppDependencies.jUnitDep)
-    debugImplementation(AppDependencies.composeToolsDep)
-    debugImplementation(AppDependencies.composeManifestTestDep)
     kapt(AppDependencies.dagger2CompilerDep)
 }

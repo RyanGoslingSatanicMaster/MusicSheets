@@ -36,4 +36,6 @@ android {
 
 dependencies {
     implementation(AppDependencies.kotlinDep)
+    implementation(AppDependencies.lifecycleDep)
+    implementation(AppDependencies.composeActivityDep)
 }

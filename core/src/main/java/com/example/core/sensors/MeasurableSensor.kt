@@ -12,4 +12,8 @@ abstract class MeasurableSensor(protected val sensorType: Int) {
     fun setOnSensorValuesChangedListener(listener: ((List<Float>) -> Unit)? = null){
         onSensorValuesChanged = listener
     }
+
+    fun removeOnSensorValuesChangedListener(){
+        onSensorValuesChanged = null
+    }
 }

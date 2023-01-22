@@ -4,13 +4,17 @@ object AppDependencies {
 
     const val kotlinDep = "androidx.core:core-ktx:${Versions.kotlinVersion}"
     const val composeDep = "androidx.compose.ui:ui:${Versions.composeUIVersion}"
+    const val androidDep = "androidx.appcompat:appcompat:${Versions.androidDep}"
     const val lifecycleDep = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleVersion}"
     const val lifecycleLiveDataDep = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}"
-    const val lifecycleViewModelDep = "androidx.lifecycle:lifecycle-viewmodel-ktx${Versions.lifecycleVersion}"
+    const val lifecycleViewModelDep = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleVersion}"
     const val lifecycleServiceDep = "androidx.lifecycle:lifecycle-service-ktx:${Versions.lifecycleVersion}"
     const val dagger2Dep = "com.google.dagger:dagger:${Versions.dagger2Version}"
     const val retrofitDep = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
     const val retrofitGsonDep = "com.squareup.retrofit2:converter-gson:${Versions.dagger2Version}"
+    const val composeActivityDep = "androidx.activity:activity-compose:${Versions.activityComposeVersion}"
+    const val composeMaterialDep = "androidx.compose.material:material:${Versions.composeUIVersion}"
+    const val gradleDep = "com.android.tools.build:gradle:${Versions.gradleVersion}"
 
     const val dagger2CompilerDep = "com.google.dagger:dagger-compiler:${Versions.dagger2Version}"
 

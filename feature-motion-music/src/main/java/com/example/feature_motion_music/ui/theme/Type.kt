@@ -1,4 +1,4 @@
-package com.example.motion_music.ui.theme
+package com.example.feature_motion_music.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

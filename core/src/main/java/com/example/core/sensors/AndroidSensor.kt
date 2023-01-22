@@ -5,6 +5,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.util.Log
 
 abstract class AndroidSensor(
     private val context: Context,
@@ -20,6 +21,7 @@ abstract class AndroidSensor(
     private var sensor: Sensor? = null
 
     override fun startListening() {
+        Log.v(sensorFeature, doesSensorExist.toString())
         if (!doesSensorExist) return
         if (!::sensorManager.isInitialized && sensor == null){
             sensorManager = context.getSystemService(SensorManager::class.java) as SensorManager
