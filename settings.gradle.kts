@@ -15,5 +15,6 @@ dependencyResolutionManagement {
 rootProject.name = "MusicSheets"
 include(":app")
 include(":feature-motion-music")
-include(":core")
+include(":core-sensor")
 include(":common")
+include(":core-synth")

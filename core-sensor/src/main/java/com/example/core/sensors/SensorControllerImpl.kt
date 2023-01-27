@@ -1,19 +1,18 @@
 package com.example.core.sensors
 
-import android.app.Activity
-import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 
-class SensorController(
+internal class SensorControllerImpl(
     sensorTypeList: List<SensorType>,
     private val activity: ComponentActivity,
-) {
+): SensorController {
 
     private val androidSensors: List<Sensors>
+
+    private var isListenerSet = false
 
     init {
         androidSensors = sensorTypeList.provideSensors()
@@ -21,7 +20,8 @@ class SensorController(
             override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
                 when(event){
                     Lifecycle.Event.ON_START -> androidSensors.forEach {
-                        it.startListening()
+                        if (isListenerSet)
+                            it.startListening()
                     }
                     Lifecycle.Event.ON_STOP -> androidSensors.forEach {
                         it.stopListening()
@@ -32,7 +32,7 @@ class SensorController(
         })
     }
 
-    fun List<SensorType>.provideSensors(): List<Sensors>{
+    private fun List<SensorType>.provideSensors(): List<Sensors>{
         val list = mutableListOf<Sensors>()
         forEach {
             list.add(it.getSensor(activity))
@@ -40,7 +40,8 @@ class SensorController(
         return list
     }
 
-    fun setListener(listener: (Pair<SensorType, List<Float>>) -> Unit){
+    override fun setListener(listener: (Pair<SensorType, List<Float>>) -> Unit){
+        isListenerSet = true
         androidSensors.forEach{ sensor ->
             sensor.setOnSensorValuesChangedListener {
                 listener(SensorType.getSensorType(sensor) to it)
@@ -48,7 +49,8 @@ class SensorController(
         }
     }
 
-    fun removeListener(type: SensorType){
+    override fun removeListener(type: SensorType){
+        isListenerSet = false
         androidSensors.find{ SensorType.getSensorType(it) == type}?.removeOnSensorValuesChangedListener()
     }
 

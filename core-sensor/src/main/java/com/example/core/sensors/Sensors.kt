@@ -5,7 +5,7 @@ import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorManager
 
-sealed class Sensors(
+internal sealed class Sensors(
     context: Context,
     sensorFeature: String,
     delay: Int = SensorManager.SENSOR_DELAY_NORMAL,
@@ -32,7 +32,7 @@ sealed class Sensors(
         context: Context
     ) : Sensors(
         context = context,
-        sensorFeature = PackageManager.FEATURE_SENSOR_HINGE_ANGLE,
+        sensorFeature = PackageManager.FEATURE_SENSOR_ACCELEROMETER,
         sensorType = Sensor.TYPE_ACCELEROMETER
     )
 
@@ -40,7 +40,7 @@ sealed class Sensors(
         context: Context
     ) : Sensors(
         context = context,
-        sensorFeature = PackageManager.FEATURE_SENSOR_COMPASS,
+        sensorFeature = PackageManager.FEATURE_SENSOR_GYROSCOPE,
         sensorType = Sensor.TYPE_GRAVITY
     )
 

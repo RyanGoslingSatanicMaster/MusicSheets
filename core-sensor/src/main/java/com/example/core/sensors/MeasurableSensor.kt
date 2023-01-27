@@ -1,6 +1,6 @@
 package com.example.core.sensors
 
-abstract class MeasurableSensor(protected val sensorType: Int) {
+internal abstract class MeasurableSensor(protected val sensorType: Int) {
 
     protected var onSensorValuesChanged: ((List<Float>) -> Unit)? = null
 

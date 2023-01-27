@@ -7,7 +7,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
 
-abstract class AndroidSensor(
+internal abstract class AndroidSensor(
     private val context: Context,
     private val sensorFeature: String,
     private val delay: Int = SensorManager.SENSOR_DELAY_NORMAL,

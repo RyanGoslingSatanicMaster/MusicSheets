@@ -1,42 +1,40 @@
 package com.example.feature_motion_music
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.core.sensors.SensorController
 import com.example.core.sensors.SensorType
-import com.example.feature_motion_music.di.MotionMusicModule
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 class MotionMusicViewModel @Inject constructor(
-    private val sensorController: SensorController
-): ViewModel() {
+    private val controller: MotionMusicController
+) : ViewModel() {
 
-    private val startValues: Map<SensorType, List<Float>> = setDefaultValues()
+    private val _sensorStates = MutableStateFlow<Map<SensorType, List<Float>>>(mapOf())
 
-    private val _sensorStates = MutableStateFlow(startValues)
-
-    val sensorStates: StateFlow<Map<SensorType, List<Float>>> = _sensorStates
+    val sensorStates = _sensorStates.asStateFlow()
 
     init {
-        sensorController.setListener(::onSensorValueChange)
+        controller.setSensorListener(::onSensorValueChange)
     }
 
-    private fun setDefaultValues(): Map<SensorType, List<Float>>{
+    /*private fun setDefaultValues(): Map<SensorType, List<Float>> {
         val map = mutableMapOf<SensorType, List<Float>>()
-        MotionMusicModule.listSensorType.forEach{
+        MotionMusicModule.listSensorType.forEach {
             map.plus(it to listOf())
         }
         return map
-    }
+    }*/
 
 
-    fun onSensorValueChange(pair: Pair<SensorType, List<Float>>){
-        _sensorStates.value = _sensorStates.value.toMutableMap().apply {
-            get(pair.first)?.let {
-                minus(pair.first)
-                plus(pair.first to it)
+    fun onSensorValueChange(pair: Pair<SensorType, List<Float>>) {
+        _sensorStates.update {
+            it.toMutableMap().apply {
+                get(pair.first)?.let {
+                    minus(pair.first)
+                }
+                put(pair.first, pair.second)
             }
         }
     }

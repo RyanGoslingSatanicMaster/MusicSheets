@@ -45,8 +45,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core-sensor"))
     implementation(project(":common"))
+    implementation(project(":core-synth"))
     implementation(AppDependencies.androidDep)
     implementation(AppDependencies.composeActivityDep)
     implementation(AppDependencies.composeDep)

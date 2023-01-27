@@ -1,10 +1,10 @@
 package com.example.feature_motion_music.di
 
-import android.content.Context
 import androidx.activity.ComponentActivity
 import com.example.common.di.annotations.PerActivity
 import com.example.core.sensors.SensorController
 import com.example.core.sensors.SensorType
+import com.example.core_synth.Synthesizer
 import dagger.Module
 import dagger.Provides
 
@@ -13,8 +13,7 @@ object MotionMusicModule {
 
     val listSensorType = listOf(
         SensorType.LIGHT,
-        SensorType.GRAVITY,
-        SensorType.GYROSCOPE,
+        SensorType.PROXIMITY,
         SensorType.ACCELEROMETER
     )
 
@@ -23,5 +22,12 @@ object MotionMusicModule {
     @Provides
     fun provideSensorController(
         activity: ComponentActivity
-    ): SensorController = SensorController(listSensorType, activity)
+    ): SensorController = SensorController.getSensorController(listSensorType, activity)
+
+    @PerActivity
+    @JvmStatic
+    @Provides
+    fun provideSynthController(
+    ): Synthesizer = Synthesizer.getTestSynth()
+
 }

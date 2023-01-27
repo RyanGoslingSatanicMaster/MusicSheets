@@ -8,7 +8,7 @@ import dagger.BindsInstance
 import dagger.Subcomponent
 
 @PerActivity
-@Subcomponent(modules = [MotionMusicModule::class, MotionMusicVMModule::class])
+@Subcomponent(modules = [MotionMusicModule::class, MotionMusicVMModule::class, MotionMusicDepModule::class])
 interface MotionMusicComponent {
 
     fun inject(activity: MotionMusicActivity)

@@ -53,7 +53,8 @@ android {
 
 dependencies {
     implementation(project(":feature-motion-music"))
-    implementation(project(":core"))
+    implementation(project(":core-sensor"))
+    implementation(project(":core-synth"))
     implementation(project(":common"))
     implementation(AppDependencies.androidDep)
     implementation(AppDependencies.composeDep)
