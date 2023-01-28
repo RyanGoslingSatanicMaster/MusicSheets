@@ -15,6 +15,7 @@ object AppDependencies {
     const val composeActivityDep = "androidx.activity:activity-compose:${Versions.activityComposeVersion}"
     const val composeMaterialDep = "androidx.compose.material:material:${Versions.composeUIVersion}"
     const val gradleDep = "com.android.tools.build:gradle:${Versions.gradleVersion}"
+    const val oboeDep = "com.google.oboe:oboe:1.6.1"
 
     const val dagger2CompilerDep = "com.google.dagger:dagger-compiler:${Versions.dagger2Version}"
 

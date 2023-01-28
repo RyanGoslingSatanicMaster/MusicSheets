@@ -10,4 +10,5 @@ object Versions {
     const val extComposeKotlinVersion = "1.3.2"
     const val androidDep = "1.5.1"
     const val activityComposeVersion = "1.6.1"
+    const val oboeVersion = "1.6.1"
 }

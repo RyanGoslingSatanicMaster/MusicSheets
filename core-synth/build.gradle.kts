@@ -12,6 +12,12 @@ android {
         targetSdk = AppConfig.targetSdk
 
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        externalNativeBuild {
+            cmake {
+                cppFlags += "-std=c++2a"
+                arguments += "-DANDROID_STL=c++_shared"
+            }
+        }
     }
 
     buildTypes {
@@ -27,8 +33,17 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures{
+        prefab = true
+    }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.18.1"
+        }
     }
 }
 
@@ -36,4 +51,5 @@ dependencies {
 
     implementation(AppDependencies.kotlinDep)
     implementation(AppDependencies.androidDep)
+    implementation(AppDependencies.oboeDep)
 }

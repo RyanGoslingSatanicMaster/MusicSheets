@@ -9,6 +9,6 @@ interface Synthesizer {
     suspend fun setWaveTable(wavetable: WaveTable)
 
     companion object{
-        fun getTestSynth(): Synthesizer = TestSynthesizerImpl()
+        fun getTestSynth(): Synthesizer = NativeSynthesizer()
     }
 }
