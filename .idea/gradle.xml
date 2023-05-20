@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/core-sensor" />
             <option value="$PROJECT_DIR$/core-synth" />
+            <option value="$PROJECT_DIR$/feature-handle-editor" />
             <option value="$PROJECT_DIR$/feature-motion-music" />
           </set>
         </option>

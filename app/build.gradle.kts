@@ -53,6 +53,7 @@ android {
 
 dependencies {
     implementation(project(":feature-motion-music"))
+    implementation(project(":feature-handle-editor"))
     implementation(project(":core-sensor"))
     implementation(project(":core-synth"))
     implementation(project(":common"))

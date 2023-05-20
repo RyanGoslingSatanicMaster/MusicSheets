@@ -13,8 +13,6 @@ interface MotionMusicComponent {
 
     fun inject(activity: MotionMusicActivity)
 
-    fun getNavHost(): NavigateToHost
-
     @Subcomponent.Builder
     interface Builder{
 

@@ -2,10 +2,12 @@
 // Means that include one time
 #include "WaveTable.h"
 #include <memory>
+#include <mutex>
+#include "WaveTableFactory.h"
 
 namespace core_synth {
 
-    class AudioSource;
+    class WaveOscillator;
     class AudioPlayer;
 
     constexpr auto samplingRate = 48000;
@@ -20,10 +22,14 @@ namespace core_synth {
         void setFrequency(float frequencyInHz);
         void setVolume(float volumeInDb);
         void setWavetable(WaveTable waveTable);
+        WaveTable getCurrentWaveTable() const;
 
     private:
-        bool _isPlaying = false;
-        std::shared_ptr<AudioSource> _oscillator;
+        std::atomic<bool> _isPlaying = false;
+        std::mutex _mutex;
+        WaveTableFactory _waveTableFactory;
+        WaveTable _currentWaveTable{WaveTable::SINE};
+        std::shared_ptr<WaveOscillator> _oscillator;
         std::unique_ptr<AudioPlayer> _audioPlayer;
     };
 

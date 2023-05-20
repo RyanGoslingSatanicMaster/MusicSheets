@@ -29,6 +29,10 @@ internal class TestSynthesizerImpl: Synthesizer {
         Log.v(TAG, "setWaveTable() called with $waveTable")
     }
 
+    override suspend fun getCurrentWaveTable(): WaveTable {
+        return WaveTable.NONE
+    }
+
     companion object {
 
         private const val TAG = "TEST_SYNTH_TAG"

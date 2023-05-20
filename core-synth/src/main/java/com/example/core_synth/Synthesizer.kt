@@ -7,6 +7,7 @@ interface Synthesizer {
     suspend fun setFrequency(hz: Hz)
     suspend fun setVolume(db: Db)
     suspend fun setWaveTable(wavetable: WaveTable)
+    suspend fun getCurrentWaveTable(): WaveTable
 
     companion object{
         fun getTestSynth(): Synthesizer = NativeSynthesizer()

@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.feature_handle_editor.HandleEditorActivity
 import com.example.feature_motion_music.MotionMusicActivity
 import com.example.musicsheets.ui.theme.MusicSheetsTheme
 
@@ -48,10 +49,21 @@ fun TestGoToMotionAct(context: Context) {
         }) {
             Text(text = "Motion Music")
         }
+
+        Button(modifier = Modifier.background(Color(1233)), onClick = {
+            navigateToHandleEditorAct(context)
+        }) {
+            Text(text = "HandleEditor")
+        }
     }
 }
 
 fun navigateToMotionAct(context: Context){
     val intent = Intent(context, MotionMusicActivity::class.java)
+    context.startActivity(intent)
+}
+
+fun navigateToHandleEditorAct(context: Context){
+    val intent = Intent(context, HandleEditorActivity::class.java)
     context.startActivity(intent)
 }

@@ -18,7 +18,7 @@ import com.example.common.NavigateToHost
 import com.example.core.sensors.SensorType
 import com.example.feature_motion_music.di.MotionMusicAppComponent
 import com.example.feature_motion_music.di.MotionMusicComponent
-import com.example.feature_motion_music.ui.theme.MusicSheetsTheme
+import com.example.feature_motion_music.ui.theme.MotionMusicTheme
 import javax.inject.Inject
 
 class MotionMusicActivity : BaseActivity() {
@@ -35,7 +35,7 @@ class MotionMusicActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MusicSheetsTheme {
+            MotionMusicTheme {
                 MotionMusicLayout()
             }
         }
@@ -46,7 +46,6 @@ class MotionMusicActivity : BaseActivity() {
             ((application as BaseApp).getAppComponent() as MotionMusicAppComponent)
                 .getMotionMusicComponentBuilder().activity(this).build()
         component.inject(this)
-        navigateToHost = component.getNavHost()
     }
 
     @Composable

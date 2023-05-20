@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Log.h"
 #include "include/NativeSynthesizer.h"
 #include "OboeAudioPlayer.h"
@@ -7,13 +8,15 @@
 namespace core_synth{
 
     NativeSynthesizer::NativeSynthesizer()
-    : _oscillator{std::make_shared<A4Oscillator>(samplingRate)},
+    : _oscillator{std::make_shared<WaveOscillator>(
+            _waveTableFactory.getWaveTable(_currentWaveTable),
+            samplingRate)},
         _audioPlayer(std::make_unique<OboeAudioPlayer>(_oscillator, samplingRate)) {}
 
     NativeSynthesizer::~NativeSynthesizer() = default;
 
     void NativeSynthesizer::play(){
-        LOGD("Play() called. C++");
+        std::lock_guard<std::mutex> lock(_mutex);
         const auto  result = _audioPlayer->play();
         // 0 = SUCCESS code
         if (result == 0) {
@@ -24,26 +27,37 @@ namespace core_synth{
     }
 
     void NativeSynthesizer::stop(){
-        LOGD("Stop() called. C++");
+        std::lock_guard<std::mutex> lock(_mutex);
         _audioPlayer->stop();
         _isPlaying = false;
     }
 
     bool NativeSynthesizer::isPlaying() const{
-        LOGD("isPlaying() called. C++");
         return _isPlaying;
     }
 
     void NativeSynthesizer::setFrequency(float frequencyInHz){
-        LOGD("setFrequency() called with %.2f Hz. C++", frequencyInHz);
+        _oscillator->setFrequency(frequencyInHz);
+    }
+
+    float dBToAmplitude(float dB) {
+        return std::pow(10.f, dB/20.f);
     }
 
     void NativeSynthesizer::setVolume(float volumeInDb){
-        LOGD("setVolume() called with %.2f dB. C++", volumeInDb);
+        const auto amplitude = dBToAmplitude(volumeInDb);
+        _oscillator->setAmplitude(amplitude);
     }
 
     void NativeSynthesizer::setWavetable(WaveTable waveTable){
-        LOGD("setWavetable() called with %.d. C++" , static_cast<int>(waveTable));
+        if (_currentWaveTable != waveTable) {
+            _currentWaveTable = waveTable;
+            _oscillator->setWaveTable(_waveTableFactory.getWaveTable(waveTable));
+        }
+    }
+
+    WaveTable NativeSynthesizer::getCurrentWaveTable() const{
+        return _currentWaveTable;
     }
 }
 

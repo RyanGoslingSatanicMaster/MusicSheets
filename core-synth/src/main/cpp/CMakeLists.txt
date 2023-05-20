@@ -21,7 +21,7 @@ add_library( # Sets the name of the library.
              # Sets the library as a shared library.
              SHARED
 
-            WaveTableFactory.cpp
+             WaveTableFactory.cpp
              NativeSynthesizer.cpp
              OboeAudioPlayer.cpp
              Oscillator.cpp

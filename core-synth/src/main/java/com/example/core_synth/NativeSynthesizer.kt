@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class NativeSynthesizer : Synthesizer, DefaultLifecycleObserver {
+internal class NativeSynthesizer : Synthesizer, DefaultLifecycleObserver {
 
     private var synthesizerHandle: Long = 0
 
@@ -26,6 +26,8 @@ class NativeSynthesizer : Synthesizer, DefaultLifecycleObserver {
     private external fun setVolume(synthesizerHandle: Long, volumeInDb: Float)
 
     private external fun setWaveTable(synthesizerHandle: Long, wavetable: Int)
+
+    private external fun getCurrentWaveTable(synthesizerHandle: Long): Int
 
     companion object{
         init {
@@ -100,6 +102,13 @@ class NativeSynthesizer : Synthesizer, DefaultLifecycleObserver {
         synchronized(synthesizerMutex){
             createNativeIfNotExists()
             setWaveTable(synthesizerHandle, wavetable.ordinal)
+        }
+    }
+
+    override suspend fun getCurrentWaveTable(): WaveTable = withContext(Dispatchers.Default) {
+        synchronized(synthesizerMutex){
+            createNativeIfNotExists()
+            return@withContext WaveTable.getByOrdinal(getCurrentWaveTable(synthesizerHandle))
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.common.BaseApp
 import com.example.common.di.ApplicationComponent
 import com.example.common.di.annotations.ApplicationContext
+import com.example.feature_handle_editor.di.HandleEditorAppComponent
 import com.example.feature_motion_music.di.MotionMusicAppComponent
 import com.example.musicsheets.App
 import dagger.BindsInstance
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [MainAppModule::class])
-interface MainAppComponent: ApplicationComponent, MotionMusicAppComponent {
+interface MainAppComponent: ApplicationComponent, MotionMusicAppComponent, HandleEditorAppComponent {
 
     fun inject(app: App)
 

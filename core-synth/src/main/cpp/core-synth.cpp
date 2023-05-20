@@ -114,4 +114,17 @@ extern "C" {
             LOGD("Synthesizer not created.");
         }
     }
+
+    JNIEXPORT jint JNICALL
+    Java_com_example_core_1synth_NativeSynthesizer_getCurrentWaveTable(JNIEnv *env, jobject thiz,
+                                                                   jlong synthesizer_handle) {
+        auto *synthesizer = reinterpret_cast<core_synth::NativeSynthesizer*>(synthesizer_handle);
+        if (synthesizer) {
+            return static_cast<jint>(synthesizer->getCurrentWaveTable());
+        } else {
+            LOGD("Synthesizer not created.");
+        }
+
+        return -1;
+    }
 }

@@ -1,11 +1,11 @@
 plugins {
     id("com.android.library")
-    kotlin("kapt")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.example.feature_motion_music"
+    namespace = "com.example.feature_handle_editor"
     compileSdk = AppConfig.compileSdk
 
     defaultConfig {
@@ -37,14 +37,13 @@ android {
     buildFeatures {
         compose = true
     }
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "1.8"
-        }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
 dependencies {
+
     implementation(project(":core-sensor"))
     implementation(project(":common"))
     implementation(project(":core-synth"))
@@ -58,6 +57,8 @@ dependencies {
     implementation(AppDependencies.lifecycleDep)
     implementation(AppDependencies.lifecycleViewModelDep)
     implementation(AppDependencies.lifecycleLiveDataDep)
+    implementation("androidx.appcompat:appcompat:1.6.0")
+    implementation("com.google.android.material:material:1.4.0")
     testImplementation(AppDependencies.jUnitDep)
     kapt(AppDependencies.dagger2CompilerDep)
 }
